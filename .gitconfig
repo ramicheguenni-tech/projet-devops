@@ -1,3 +1,5 @@
 [user]
 	name = Rami Cheguenni
 	email = rami.cheguenni@sesame.com.tn
+[credential]
+	helper = store
