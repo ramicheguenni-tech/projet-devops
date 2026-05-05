@@ -1,9 +1,0 @@
-target/
-*.jar
-*.war
-*.class
-.env
-secrets/
-*.key
-*.pem
-.sonar/

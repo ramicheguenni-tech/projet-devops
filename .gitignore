@@ -1,0 +1,14 @@
+target/
+*.jar
+*.war
+*.class
+.env
+secrets/
+*.key
+*.pem
+.sonar/
+**/*password*
+**/*secret*
+*.log
+.jenkins/
+.m2/
