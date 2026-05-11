@@ -7,6 +7,9 @@ services:
       - "9000:9000"
     environment:
       - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+      - SONAR_WEB_JAVAOPTS=-Xmx512m -Xms128m
+      - SONAR_CE_JAVAOPTS=-Xmx256m -Xms64m
+      - SONAR_SEARCH_JAVAOPTS=-Xmx512m -Xms256m
     volumes:
       - sonar_data:/opt/sonarqube/data
       - sonar_logs:/opt/sonarqube/logs
@@ -14,22 +17,23 @@ services:
     networks:
       - devops-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:9000/api/system/status"]
-      interval: 30s
-      timeout: 10s
-      retries: 10
+    mem_limit: 1.5g
+    memswap_limit: 2g
 
   nexus:
     image: sonatype/nexus3
     container_name: nexus
     ports:
       - "8081:8081"
+    environment:
+      - INSTALL4J_ADD_VM_PARAMS=-Xms256m -Xmx512m -XX:MaxDirectMemorySize=512m
     volumes:
       - nexus_data:/nexus-data
     networks:
       - devops-network
     restart: unless-stopped
+    mem_limit: 1g
+    memswap_limit: 1.5g
 
   prometheus:
     image: prom/prometheus
@@ -42,12 +46,12 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=7d'
       - '--web.enable-lifecycle'
     networks:
       - devops-network
     restart: unless-stopped
+    mem_limit: 256m
 
   grafana:
     image: grafana/grafana
@@ -59,6 +63,9 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin123
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_ALERTING_ENABLED=true
+      - GF_UNIFIED_ALERTING_ENABLED=true
+      - GF_SMTP_ENABLED=false
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning:ro
@@ -68,6 +75,7 @@ services:
     depends_on:
       - prometheus
     restart: unless-stopped
+    mem_limit: 256m
 
   devops-app:
     build: .
@@ -78,6 +86,7 @@ services:
     networks:
       - devops-network
     restart: unless-stopped
+    mem_limit: 512m
     healthcheck:
       test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:8080/health"]
       interval: 30s
