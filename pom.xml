@@ -12,8 +12,6 @@
     <artifactId>devops-app</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>devops-app</name>
-    <description>DevOps Project - SESAME Technology - Rami Cheguenni</description>
 
     <dependencies>
         <dependency>
