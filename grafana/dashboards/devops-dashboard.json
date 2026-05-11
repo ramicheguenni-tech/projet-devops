@@ -1,211 +1,145 @@
 {
   "annotations": {"list": []},
   "editable": true,
-  "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "links": [],
   "panels": [
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "datasource": {"type": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {"mode": "thresholds"},
-          "thresholds": {"mode": "absolute", "steps": [
-            {"color": "red", "value": null},
-            {"color": "green", "value": 1}
-          ]},
-          "mappings": [{"options": {"0": {"text": "DOWN"}, "1": {"text": "UP"}}, "type": "value"}]
+          "thresholds": {"steps": [{"color": "red","value": null},{"color": "green","value": 1}]},
+          "mappings": [{"options": {"0": {"text": "DOWN"},"1": {"text": "UP"}},"type": "value"}]
         }
       },
       "gridPos": {"h": 4, "w": 4, "x": 0, "y": 0},
       "id": 1,
-      "options": {"colorMode": "background", "graphMode": "none", "reduceOptions": {"calcs": ["lastNotNull"]}},
-      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "up{job=\"devops-app\"}", "legendFormat": "Status"}],
+      "options": {"colorMode": "background","reduceOptions": {"calcs": ["lastNotNull"]}},
+      "targets": [{"expr": "up{job=\"devops-app\"}","legendFormat": "Status"}],
       "title": "App Status",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "color": {"mode": "thresholds"},
-          "unit": "s",
-          "thresholds": {"steps": [{"color": "green", "value": null}]}
-        }
-      },
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"},"unit": "s","thresholds": {"steps": [{"color": "green","value": null}]}}},
       "gridPos": {"h": 4, "w": 5, "x": 4, "y": 0},
       "id": 2,
-      "options": {"colorMode": "background", "reduceOptions": {"calcs": ["lastNotNull"]}},
-      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "process_uptime_seconds{job=\"devops-app\"}", "legendFormat": "Uptime"}],
-      "title": "Uptime",
+      "options": {"colorMode": "background","reduceOptions": {"calcs": ["lastNotNull"]}},
+      "targets": [{"expr": "process_uptime_seconds{job=\"devops-app\"}","legendFormat": "Uptime"}],
+      "title": "Uptime (seconds)",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "color": {"mode": "thresholds"},
-          "unit": "bytes",
-          "thresholds": {"steps": [
-            {"color": "green", "value": null},
-            {"color": "yellow", "value": 200000000},
-            {"color": "red", "value": 350000000}
-          ]}
-        }
-      },
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"},"unit": "bytes","thresholds": {"steps": [{"color": "green","value": null},{"color": "yellow","value": 200000000},{"color": "red","value": 350000000}]}}},
       "gridPos": {"h": 4, "w": 5, "x": 9, "y": 0},
       "id": 3,
-      "options": {"colorMode": "background", "reduceOptions": {"calcs": ["lastNotNull"]}},
-      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(jvm_memory_used_bytes{job=\"devops-app\", area=\"heap\"})", "legendFormat": "Heap"}],
+      "options": {"colorMode": "background","reduceOptions": {"calcs": ["lastNotNull"]}},
+      "targets": [{"expr": "sum(jvm_memory_used_bytes{job=\"devops-app\", area=\"heap\"})","legendFormat": "Heap"}],
       "title": "JVM Heap Used",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "color": {"mode": "thresholds"},
-          "unit": "percentunit",
-          "thresholds": {"steps": [
-            {"color": "green", "value": null},
-            {"color": "yellow", "value": 0.5},
-            {"color": "red", "value": 0.8}
-          ]}
-        }
-      },
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"},"unit": "percentunit","thresholds": {"steps": [{"color": "green","value": null},{"color": "yellow","value": 0.5},{"color": "red","value": 0.8}]}}},
       "gridPos": {"h": 4, "w": 5, "x": 14, "y": 0},
       "id": 4,
-      "options": {"colorMode": "background", "reduceOptions": {"calcs": ["lastNotNull"]}},
-      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "process_cpu_usage{job=\"devops-app\"}", "legendFormat": "CPU"}],
+      "options": {"colorMode": "background","reduceOptions": {"calcs": ["lastNotNull"]}},
+      "targets": [{"expr": "process_cpu_usage{job=\"devops-app\"}","legendFormat": "CPU"}],
       "title": "CPU Usage",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "color": {"mode": "thresholds"},
-          "thresholds": {"steps": [{"color": "green", "value": null}]}
-        }
-      },
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"},"thresholds": {"steps": [{"color": "green","value": null}]}}},
       "gridPos": {"h": 4, "w": 5, "x": 19, "y": 0},
       "id": 5,
-      "options": {"colorMode": "background", "reduceOptions": {"calcs": ["lastNotNull"]}},
-      "targets": [{"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(http_server_requests_seconds_count{job=\"devops-app\"})", "legendFormat": "Total"}],
+      "options": {"colorMode": "background","reduceOptions": {"calcs": ["lastNotNull"]}},
+      "targets": [{"expr": "sum(http_server_requests_seconds_count{job=\"devops-app\"})","legendFormat": "Requests"}],
       "title": "Total HTTP Requests",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {"color": {"mode": "palette-classic"}, "unit": "bytes"},
-        "overrides": [
-          {"matcher": {"id": "byName", "options": "Heap Max"}, "properties": [{"id": "custom.lineStyle", "value": {"dash": [10, 10], "fill": "dash"}}]}
-        ]
-      },
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"},"unit": "bytes"}},
       "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
       "id": 6,
       "options": {"tooltip": {"mode": "multi"}},
       "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(jvm_memory_used_bytes{job=\"devops-app\", area=\"heap\"})", "legendFormat": "Heap Used"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(jvm_memory_committed_bytes{job=\"devops-app\", area=\"heap\"})", "legendFormat": "Heap Committed"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(jvm_memory_max_bytes{job=\"devops-app\", area=\"heap\"})", "legendFormat": "Heap Max"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(jvm_memory_used_bytes{job=\"devops-app\", area=\"nonheap\"})", "legendFormat": "Non-Heap Used"}
+        {"expr": "sum(jvm_memory_used_bytes{job=\"devops-app\", area=\"heap\"})","legendFormat": "Heap Used"},
+        {"expr": "sum(jvm_memory_committed_bytes{job=\"devops-app\", area=\"heap\"})","legendFormat": "Heap Committed"},
+        {"expr": "sum(jvm_memory_max_bytes{job=\"devops-app\", area=\"heap\"})","legendFormat": "Heap Max"},
+        {"expr": "sum(jvm_memory_used_bytes{job=\"devops-app\", area=\"nonheap\"})","legendFormat": "Non-Heap Used"}
       ],
-      "title": "JVM Memory (Dynamic)",
+      "title": "JVM Memory Over Time",
       "type": "timeseries"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}, "unit": "reqps"}},
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"},"unit": "reqps"}},
       "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
       "id": 7,
       "options": {"tooltip": {"mode": "multi"}},
       "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum by (uri, method, status) (rate(http_server_requests_seconds_count{job=\"devops-app\"}[1m]))", "legendFormat": "{{method}} {{uri}} [{{status}}]"}
+        {"expr": "sum by (uri, method, status) (rate(http_server_requests_seconds_count{job=\"devops-app\"}[1m]))","legendFormat": "{{method}} {{uri}} [{{status}}]"}
       ],
-      "title": "HTTP Request Rate by Endpoint (Dynamic)",
+      "title": "HTTP Request Rate by Endpoint",
       "type": "timeseries"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}, "unit": "s"}},
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"},"unit": "s"}},
       "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
       "id": 8,
       "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum by (uri) (rate(http_server_requests_seconds_sum{job=\"devops-app\"}[1m])) / sum by (uri) (rate(http_server_requests_seconds_count{job=\"devops-app\"}[1m]))", "legendFormat": "Avg {{uri}}"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "histogram_quantile(0.95, sum by (le, uri) (rate(http_server_requests_seconds_bucket{job=\"devops-app\"}[5m])))", "legendFormat": "P95 {{uri}}"}
+        {"expr": "sum by (uri) (rate(http_server_requests_seconds_sum{job=\"devops-app\"}[1m])) / sum by (uri) (rate(http_server_requests_seconds_count{job=\"devops-app\"}[1m]))","legendFormat": "Avg {{uri}}"}
       ],
-      "title": "Response Time P95 & Avg (Dynamic)",
+      "title": "Response Time Average",
       "type": "timeseries"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "datasource": {"type": "prometheus"},
       "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}}},
       "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
       "id": 9,
       "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "jvm_threads_live_threads{job=\"devops-app\"}", "legendFormat": "Live Threads"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "jvm_threads_daemon_threads{job=\"devops-app\"}", "legendFormat": "Daemon"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "jvm_threads_peak_threads{job=\"devops-app\"}", "legendFormat": "Peak"}
+        {"expr": "jvm_threads_live_threads{job=\"devops-app\"}","legendFormat": "Live"},
+        {"expr": "jvm_threads_daemon_threads{job=\"devops-app\"}","legendFormat": "Daemon"},
+        {"expr": "jvm_threads_peak_threads{job=\"devops-app\"}","legendFormat": "Peak"}
       ],
-      "title": "JVM Threads (Dynamic)",
+      "title": "JVM Threads",
       "type": "timeseries"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}, "unit": "percentunit"}},
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"},"unit": "percentunit"}},
       "gridPos": {"h": 8, "w": 12, "x": 0, "y": 20},
       "id": 10,
       "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "process_cpu_usage{job=\"devops-app\"}", "legendFormat": "Process CPU"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "system_cpu_usage{job=\"devops-app\"}", "legendFormat": "System CPU"}
+        {"expr": "process_cpu_usage{job=\"devops-app\"}","legendFormat": "Process CPU"},
+        {"expr": "system_cpu_usage{job=\"devops-app\"}","legendFormat": "System CPU"}
       ],
       "title": "CPU Usage Over Time",
       "type": "timeseries"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}, "unit": "short"}},
+      "datasource": {"type": "prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}}},
       "gridPos": {"h": 8, "w": 12, "x": 12, "y": 20},
       "id": 11,
       "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum by (cause) (rate(jvm_gc_pause_seconds_count{job=\"devops-app\"}[5m]))", "legendFormat": "GC {{cause}}"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum by (cause) (rate(jvm_gc_pause_seconds_sum{job=\"devops-app\"}[5m]))", "legendFormat": "GC Time {{cause}}"}
+        {"expr": "jvm_gc_pause_seconds_count{job=\"devops-app\"}","legendFormat": "GC Count {{action}}"},
+        {"expr": "jvm_gc_pause_seconds_sum{job=\"devops-app\"}","legendFormat": "GC Time {{action}}"}
       ],
-      "title": "Garbage Collection (Dynamic)",
+      "title": "Garbage Collection",
       "type": "timeseries"
-    },
-    {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "color": {"mode": "thresholds"},
-          "unit": "short",
-          "thresholds": {"steps": [
-            {"color": "green", "value": null},
-            {"color": "red", "value": 1}
-          ]}
-        }
-      },
-      "gridPos": {"h": 4, "w": 24, "x": 0, "y": 28},
-      "id": 12,
-      "options": {"colorMode": "background", "reduceOptions": {"calcs": ["lastNotNull"]}},
-      "targets": [
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(rate(http_server_requests_seconds_count{job=\"devops-app\", status=~\"5..\"}[5m]))", "legendFormat": "5xx Errors/s"},
-        {"datasource": {"type": "prometheus", "uid": "prometheus"}, "expr": "sum(rate(http_server_requests_seconds_count{job=\"devops-app\", status=~\"4..\"}[5m]))", "legendFormat": "4xx Errors/s"}
-      ],
-      "title": "Error Rates (Alert Triggers)",
-      "type": "stat"
     }
   ],
   "refresh": "15s",
   "schemaVersion": 38,
-  "tags": ["devops", "spring", "sesame", "rami", "dynamic"],
-  "templating": {"list": []},
-  "time": {"from": "now-1h", "to": "now"},
-  "timepicker": {},
+  "tags": ["devops","spring","sesame","rami"],
+  "time": {"from": "now-1h","to": "now"},
   "title": "DevOps App - Rami Cheguenni - SESAME",
   "uid": "devops-rami-sesame",
   "version": 1
